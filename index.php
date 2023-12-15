@@ -1,7 +1,7 @@
 <?php
 error_reporting(-1);
 
-// require_once __DIR__ . '/db.php';
+require_once __DIR__ . '/db.php';
 ?>
 <!doctype html>
 <html lang="en">
