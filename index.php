@@ -1,7 +1,10 @@
 <?php
 error_reporting(-1);
+session_start(); 
 
 require_once __DIR__ . '/db.php';
+require_once __DIR__ . '/funcs.php';
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -20,19 +23,33 @@ require_once __DIR__ . '/db.php';
 
     <div class="row my-3">
         <div class="col">
+            <!-- Показ/скрыте ошибки -->
+            <?php if(!empty($_SESSION['errors'])):?>
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                Errors...
+                <?php
+                    echo $_SESSION['errors'];
+                    unset($_SESSION['errors']);
+                ?>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-
+            <?php endif;?>
+            <!-- Показ/скрыте успешного входа/регистрации -->
+            <?php if(!empty($_SESSION['success'])):?>
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                Success...
+                <?php
+                    echo $_SESSION['success'];
+                    unset($_SESSION['success']);
+                ?>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
+            <?php endif;?>
         </div>
     </div>
 
+  <!-- Показ/скрыте инпутов регистрации и авторизации-->
 
+    <?php if(empty($_SESSION['user']['name'])):?>
+       
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <h3>Регистрация</h3>
@@ -86,6 +103,8 @@ require_once __DIR__ . '/db.php';
             <button type="submit" name="auth" class="btn btn-primary">Войти</button>
         </div>
     </form>
+    <?php else:?>
+
 
     <div class="row">
         <div class="col-md-6 offset-md-3">
@@ -108,6 +127,7 @@ require_once __DIR__ . '/db.php';
         </div>
     </form>
 
+    <?php endif;?>
 
     <div class="row">
         <div class="col-md-6 offset-md-3">
