@@ -1,4 +1,5 @@
 <?php
+//Для соединения с БД используется PDO
 $host = 'localhost';
 $db = 'book';
 $user = 'root';
