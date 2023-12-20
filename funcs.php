@@ -1,8 +1,4 @@
 <?php
-function debug($data) {
-    echo '<pre>' . print_r($data, 1) . '</pre>';
-}
-
 // Регистрация
 
 function registration():bool {
@@ -67,11 +63,6 @@ function login():bool {
         $_SESSION['errors'] = 'Неверный логин или пароль';
         return false;
     }
-
-// debug($user);
-// debug($pass);
-// die;
-
 
 
 // password_verify - Проверяет, что пароль соответствует хэшу
