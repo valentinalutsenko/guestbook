@@ -5,9 +5,28 @@ session_start();
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/funcs.php';
 
+
+// Регистрация
+
 if (isset($_POST['register'])) {
    
     registration();
+    header('Location: index.php');
+    die;
+}
+
+// Авторизация
+
+if (isset($_POST['auth'])) {
+   
+    login();
+    header('Location: index.php');
+    die;
+}
+
+if (isset($_GET['do']) && $_GET['do'] === 'exit') {
+    
+    unset($_SESSION['user']);
     header('Location: index.php');
     die;
 }
@@ -115,7 +134,7 @@ if (isset($_POST['register'])) {
 
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <p>Добро пожаловать, User! <a href="?do=exit">Log out</a></p>
+            <p>Добро пожаловать, <?= htmlentities($_SESSION['user']['name'])?>! <a href="?do=exit">Log out</a></p>
         </div>
     </div>
 
