@@ -31,6 +31,17 @@ if (isset($_GET['do']) && $_GET['do'] === 'exit') {
     die;
 }
 
+
+// Сообщение
+
+if (isset($_POST['add'])) {
+    save_message();
+    header('Location: index.php');
+    die;
+}
+
+$messages = get_message();
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -155,21 +166,22 @@ if (isset($_GET['do']) && $_GET['do'] === 'exit') {
 
     <?php endif;?>
 
+    <?php if(!empty($messages)):?>
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <hr>
+            <?php foreach($messages as $message):?>
             <div class="card my-3">
                 <div class="card-body">
-                    <h5 class="card-title">Автор: User</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis distinctio
-                        est illum in ipsum nemo nostrum odit optio quibusdam velit. Commodi dolores dolorum ex facere
-                        maiores porro, reprehenderit velit voluptatum.</p>
-                    <p>Дата: 01.01.2000</p>
+                    <h5 class="card-title">Автор: <?= htmlspecialchars($message['name']) ?> </h5>
+                    <p class="card-text"><?= nl2br(htmlspecialchars($message['message'])) ?></p>
+                    <p>Дата: <?= date_create($message['created_at'])->Format('d.m.Y') ?></p>
                 </div>
             </div>
+            <?php endforeach;?>
         </div>
     </div>
-
+    <?php endif;?>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
