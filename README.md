@@ -4,5 +4,5 @@
 
 ## Стек
 
-PHP
-MYSQL
+- PHP
+- MYSQL
